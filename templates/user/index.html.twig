@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block body %}
+    <h1>User index</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Email</th>
+            <th>Roles</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>
+                    {% if "ROLE_ADMIN" in user.roles %}
+                        is admin
+                    {% else %}
+                        is not admin
+                    {% endif %}
+                </td>
+                <td>
+                    {% if "ROLE_ADMIN" in user.roles %}
+                        <a href="{{ path("demote_user",{id:user.id}) }}" class="btn btn-warning">demote to regular boring person</a>
+                    {% else %}
+                        <a href="{{ path("promote_user",{id:user.id}) }}" class="btn btn-success">promote to Admin</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

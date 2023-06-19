@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+
+
+    <a href="{{ path('app_home') }}" class="bouton"></a>
+
+    {% for quote in quotes %}
+        <p>{{ quote.citation.citation }}</p>
+        <p>{{ quote.citation.infos.personnage }}</p>
+
+        <a href="" class="btn btn-success">change this quote</a>
+        {% if app.user %}
+
+        <form action="{{ path('app_home_saveQuote') }}" method="post">
+            <input type="hidden" value="{{ quote.citation.infos.personnage }}" name="auteur">
+            <input type="hidden" value="{{ quote.citation.citation }}" name="content">
+            <button type="submit" class="btn btn-success">Save</button>
+        </form>
+        {% endif %}
+    {% endfor %}
+
+
+
+{% endblock %}
+

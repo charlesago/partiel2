@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block body %}
+
+    {% for quote in app.user.quote %}
+
+        <div class="container border border-dark mt-5">
+
+            <p>{{ quote.content }}</p>
+            <p>{{ quote.author }}</p>
+
+        </div>
+
+
+    {% endfor %}
+{% endblock %}
